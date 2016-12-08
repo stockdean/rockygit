@@ -1,2 +1,3 @@
 println();
-new branch is quick & simple
+
+new branch quick and simple

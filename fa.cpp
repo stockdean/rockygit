@@ -9,8 +9,8 @@ int syn,                           /*存放单词字符的种别码*/
       n,
     sum,                           /*存放整数型单词*/
     m,p;                           /*p是缓冲区prog的指针，m是token的指针*/
-char *rwtab[6]={"begin","if","then","while","do","end"};
-
+//char *rwtab[6]={"begin","if","then","while","do","end"};
+char *gjz[9]={"main","int","float","double","char","if","else","do","while"};
 void scaner(){
     m=0;
     sum=0;
@@ -19,6 +19,9 @@ void scaner(){
     ch=prog[p++];
     while(ch==' ')
         ch=prog[p++];
+    while(ch=='\n')
+        ch=prog[p++];
+
     if(isalpha(ch))    /*ch为字母字符*/{
         while(isalpha(ch)||isdigit(ch))    /*ch 为字母字符或者数字字符*/{
            token[m++]=ch;
@@ -26,8 +29,8 @@ void scaner(){
         token[m++]='\0';
         ch=prog[p--];
         syn=10;
-        for(n=0;n<6;n++)
-            if(strcmp(token,rwtab[n])==0)    /*字符串的比较*/{
+        for(n=0;n<9;n++)
+            if(strcmp(token,gjz[n])==0)    /*字符串的比较*/{
                 syn=n+1;
                 break;}}
     else
@@ -84,11 +87,12 @@ void scaner(){
                           }
 
                         break;
+
+
              case'+':syn=22;token[0]=ch;break;
              case'-':syn=23;token[0]=ch;break;
              case'*':syn=24;token[0]=ch;break;
              case'/':syn=25;token[0]=ch;break;
-
              case',':syn=30;token[0]=ch;break;
              case';':syn=31;token[0]=ch;break;
              case'(':syn=26;token[0]=ch;break;
@@ -96,13 +100,14 @@ void scaner(){
              case'}':syn=29;token[0]=ch;break;
              case'{':syn=28;token[0]=ch;break;
              case'#':syn=0;token[0]=ch;break;
+
              default:syn=-1;}}
 main()
 {
     printf("\n\nThe significance of the figures:\n"
-           "1.figures 1 to 6 said Keyword\n"
+           "1.figures 1 to 9 said Keyword\n"
            "2.figures 10 and 11 said Other indicators\n"
-           "3.figures 13 to 28 said Operators\n");
+           "3.figures 21 to 37 said Operators\n");
 
 p=0;
     printf("\nplease input string:\n");
